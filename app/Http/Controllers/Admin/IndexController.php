@@ -9,20 +9,20 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Controllers\Controller;
 use App\Model\Users;
-use Illuminate\Routing\Controller;
+
 
 class IndexController extends Controller
 {
    public function __construct()
    {
-
+          $this->init();
    }
 
     public function index()
     {
         $users = Users::all();
-        dd($users);
       return view('admin.index.index');
     }
 }
