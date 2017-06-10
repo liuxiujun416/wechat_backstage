@@ -30,13 +30,18 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
-Route::get('uses', [
-   // 'middleware' => 'auth',
-    'uses' => 'UserController@show'
-]);
+
 
 Route::group(['namespace' => 'Admin','prefix' => 'admin'], function () {
-    Route::get('index', 'IndexController@index');
+
+    Route::group(['prefix' => 'login'], function () {
+        Route::get('index', 'LoginController@index');
+        Route::post('login', 'LoginController@login');
+    });
+
+    Route::group(['prefix' => 'index'], function () {
+        Route::get('index', 'IndexController@index');
+    });
 });
 
 
