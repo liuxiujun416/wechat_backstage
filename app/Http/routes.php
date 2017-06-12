@@ -49,6 +49,17 @@ Route::group(['middleware' => ['web'],'namespace' => 'Admin','prefix' => 'admin'
         Route::post('add','RoleController@add');
         Route::get('edit','RoleController@edit');
     });
+
+    Route::group(['prefix' => 'movie'], function () {
+        Route::get('index', 'MovieController@index');
+        Route::get('add','MovieController@add');
+        Route::post('add','MovieController@add');
+    });
+});
+
+
+Route::group(['namespace' => 'Sit','prefix' => 'movie'], function () {
+        Route::get('index', 'MovieController@index');
 });
 
 
