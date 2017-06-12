@@ -5,11 +5,15 @@
     <title>很简洁漂亮的Bootstrap响应式后台管理系统模板UniAdmin</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{URL::asset('css/bootstrap-responsive.min.css')}}" />
-    <link rel="stylesheet" href="{{URL::asset('css/fullcalendar.css')}}" />
-    <link rel="stylesheet" href="{{URL::asset('css/unicorn.main.css')}}" />
-    <link rel="stylesheet" href="{{URL::asset('css/unicorn.grey.css')}}" class="skin-color" />
+    <link rel="stylesheet" href="{{URL::asset('/css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('/css/bootstrap-responsive.min.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('/css/colorpicker.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('/css/datepicker.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('/css/uniform.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('/css/select2.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('/css/unicorn.main.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('/css/fullcalendar.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('/css/unicorn.grey.css')}}" class="skin-color" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 
@@ -53,20 +57,32 @@
     <a href="#red" style="background-color: #673232;"></a>
 </div>
 
+@section('content');
 <div id="content">
-    @yield('content')
+
+
 </div>
+@show
 
 
-<script src="{{URL::asset('js/excanvas.min.js')}}"></script>
-<script src="{{URL::asset('js/jquery.min.js')}}"></script>
-<script src="{{URL::asset('js/jquery.ui.custom.js')}}"></script>
-<script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
-<script src="{{URL::asset('js/jquery.flot.min.js')}}"></script>
-<script src="{{URL::asset('js/jquery.flot.resize.min.js')}}"></script>
-<script src="{{URL::asset('js/jquery.peity.min.js')}}"></script>
-<script src="{{URL::asset('js/fullcalendar.min.js')}}"></script>
-<script src="{{URL::asset('js/unicorn.js')}}"></script>
-<script src="{{URL::asset('js/unicorn.dashboard.js')}}"></script>
+
+<script src="{{URL::asset('/js/excanvas.min.js')}}"></script>
+<script src="{{URL::asset('/js/jquery.min.js')}}"></script>
+<script src="{{URL::asset('/js/jquery.ui.custom.js')}}"></script>
+<script src="{{URL::asset('/js/bootstrap.min.js')}}"></script>
+<script src="{{URL::asset('/js/jquery.flot.min.js')}}"></script>
+<script src="{{URL::asset('/js/jquery.flot.resize.min.js')}}"></script>
+<script src="{{URL::asset('/js/jquery.peity.min.js')}}"></script>
+<script src="{{URL::asset('/js/fullcalendar.min.js')}}"></script>
+<script src="{{URL::asset('/js/unicorn.js')}}"></script>
+<script src="{{URL::asset('/js/unicorn.dashboard.js')}}"></script>
+<script src="{{URL::asset('/js/bootstrap-colorpicker.js')}}"></script>
+<script src="{{URL::asset('/js/bootstrap-datepicker.js')}}"></script>
+<script src="{{URL::asset('/js/jquery.uniform.js')}}"></script>
+<script src="{{URL::asset('/js/select2.min.js')}}"></script>
+<script src="{{URL::asset('/js/unicorn.form_common.js')}}"></script>
+
+
+
 </body>
 </html>
