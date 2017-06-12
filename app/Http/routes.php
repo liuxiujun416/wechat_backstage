@@ -32,7 +32,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
-Route::group(['namespace' => 'Admin','prefix' => 'admin'], function () {
+Route::group(['middleware' => ['web'],'namespace' => 'Admin','prefix' => 'admin'], function () {
 
     Route::group(['prefix' => 'login'], function () {
         Route::get('index', 'LoginController@index');
@@ -41,6 +41,13 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin'], function () {
 
     Route::group(['prefix' => 'index'], function () {
         Route::get('index', 'IndexController@index');
+    });
+
+    Route::group(['prefix' => 'role'], function () {
+        Route::get('index', 'RoleController@index');
+        Route::get('add','RoleController@add');
+        Route::post('add','RoleController@add');
+        Route::get('edit','RoleController@edit');
     });
 });
 

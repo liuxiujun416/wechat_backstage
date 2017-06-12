@@ -34,7 +34,7 @@ class Controller extends BaseController
             if(in_array($value['menu_id'],$pid)) {
                 $childHtml = '<ul>';
                 foreach($levelTwoMenu as $val){
-                    $childHtml .='<li><a href="form-common.html">'.$val['menu_name'].'</a></li>';
+                    $childHtml .='<li><a href="/'.$val['modul'].'/'.$val['controller'].'/'.$val['method'].'">'.$val['menu_name'].'</a></li>';
                     $count++;
                 }
                 $childHtml .='</ul>';
