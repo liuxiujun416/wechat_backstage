@@ -69,7 +69,7 @@
                                 <label class="control-label">电影</label>
                                 <div class="controls">
                                     <input type="file" name="upload-movie" />
-                                    <button type="button"  class="btn btn-primary img">upload</button>
+                                    <button type="button"  class="btn btn-primary movie">upload</button>
                                 </div>
                                 <div class="controls" id="show-movie">
                                     <input type='hidden' name='movie_path' value='' >
@@ -105,7 +105,7 @@
 
                 $.ajax({
                     type : 'post',
-                    url : '/admin/movie/upload',
+                    url : '/admin/movie/uploadimg',
                     data : formdata,
                     cache : false,
                     processData : false, // 不处理发送的数据，因为data值是Formdata对象，不需要对数据做处理
@@ -123,6 +123,35 @@
                             }
                         }
                          alert($result.message);
+                    },
+                    error : function(){ }
+                });
+            });
+
+
+            $(".movie").on('click',function(){
+                var formdata=new FormData($("#data-form")[0]); //获取文件法一
+
+                $.ajax({
+                    type : 'post',
+                    url : '/admin/movie/uploadmovie',
+                    data : formdata,
+                    cache : false,
+                    processData : false, // 不处理发送的数据，因为data值是Formdata对象，不需要对数据做处理
+                    contentType : false, // 不设置Content-type请求头
+                    success : function($result){
+                        if($result.status) {
+                            if($result.type != 'video/mp4') {
+                                $('#show-img').html("<img src='" + $result.path + "' ><input type='hidden' name='img' value='" + $result.path + "' >");
+                            }else {
+                                var html = ' <video width="320" height="240" controls="controls">'+
+                                        '<source src="'+ $result.path+'" type="video/avi">'+
+                                        '<source src="'+ $result.path+'" type="video/mp4">'+
+                                        '</video>';
+                                $('#show-movie').html(html+"<input type='hidden' name='movie_path' value='" + $result.path + "' >");
+                            }
+                        }
+                        alert($result.message);
                     },
                     error : function(){ }
                 });

@@ -51,16 +51,35 @@ class MovieController extends Controller
         return view('admin.movie.add');
     }
 
-    public function upload(Request $request)
+    public function uploadImg(Request $request)
+    {
+        //判断请求中是否包含name=file的上传文件
+
+        $file = $request->file('upload-img');
+
+        if(!$file->isValid()){
+            exit('文件上传出错！');
+        }
+        $newFileName = md5(time().rand(0,10000)).'.'.$file->getClientOriginalExtension();
+        $savePath = './upload/';
+        if(!is_dir($savePath)) {
+            mkdir($savePath, 777, true);
+        }
+        $savePath .= $newFileName;
+        file_put_contents($savePath,file_get_contents($file->getRealPath()));
+        if(!file_exists($savePath)) {
+            return response(['status'=>0,'path'=>'/','message'=>'保存文件失败！']);
+        }
+        return response(['status'=>1,'path'=>ltrim($savePath,'.'),'type'=>$file->getMimeType(),'message'=>'保存文件成功！']);
+    }
+
+    public function uploadMovie(Request $request)
     {
         //判断请求中是否包含name=file的上传文件
 
 
         $file = $request->file('upload-movie');
 
-        if(!method_exists($file,'isValid')) {
-            $file = $request->file('upload-img');
-        }
         if(!$file->isValid()){
             exit('文件上传出错！');
         }
