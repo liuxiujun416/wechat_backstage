@@ -56,7 +56,7 @@ class MovieController extends Controller
         //判断请求中是否包含name=file的上传文件
 
 
-        $file = $request->file('upload');
+        $file = $request->file('upload-movie');
 
         if(!method_exists($file,'isValid')) {
             $file = $request->file('upload-img');
