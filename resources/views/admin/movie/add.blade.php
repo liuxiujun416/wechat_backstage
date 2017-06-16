@@ -133,7 +133,10 @@
 
             $(".movie").on('click',function() {
                  $('#upload-file').click();
-                 uploadmovie();
+                if($('#upload-file').val()){
+                    uploadmovie();
+                }
+                $('#upload-file').val('');
             });
             function uploadmovie(){
                 var formdata=new FormData($("#data-upload")[0]); //获取文件法一
