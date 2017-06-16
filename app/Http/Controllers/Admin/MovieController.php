@@ -77,9 +77,7 @@ class MovieController extends Controller
     {
         //判断请求中是否包含name=file的上传文件
 
-
         $file = $request->file('upload-movie');
-
         if(!$file->isValid()){
             exit('文件上传出错！');
         }

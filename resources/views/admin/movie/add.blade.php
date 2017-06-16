@@ -68,7 +68,6 @@
                             <div class="control-group">
                                 <label class="control-label">电影</label>
                                 <div class="controls">
-                                    <input type="file" name="upload-movie" />
                                     <button type="button"  class="btn btn-primary movie">upload</button>
                                 </div>
                                 <div class="controls" id="show-movie">
@@ -82,6 +81,9 @@
                                     <button type="button" class="btn btn-primary">Return</button>
                                 </div>
                             </div>
+                            </form>
+                            <form id="data-upload" class="form-horizontal" enctype="multipart/form-data"  style="display: none; " >
+                                <input type="file" name="upload-movie" id="upload-file" />
                             </form>
                         </div>
                     </div>
@@ -129,8 +131,12 @@
             });
 
 
-            $(".movie").on('click',function(){
-                var formdata=new FormData($("#data-form")[0]); //获取文件法一
+            $(".movie").on('click',function() {
+                 $('#upload-file').click();
+                 uploadmovie();
+            });
+            function uploadmovie(){
+                var formdata=new FormData($("#data-upload")[0]); //获取文件法一
 
                 $.ajax({
                     type : 'post',
@@ -141,21 +147,17 @@
                     contentType : false, // 不设置Content-type请求头
                     success : function($result){
                         if($result.status) {
-                            if($result.type != 'video/mp4') {
-                                $('#show-img').html("<img src='" + $result.path + "' ><input type='hidden' name='img' value='" + $result.path + "' >");
-                            }else {
-                                var html = ' <video width="320" height="240" controls="controls">'+
-                                        '<source src="'+ $result.path+'" type="video/avi">'+
-                                        '<source src="'+ $result.path+'" type="video/mp4">'+
-                                        '</video>';
-                                $('#show-movie').html(html+"<input type='hidden' name='movie_path' value='" + $result.path + "' >");
-                            }
+                            var html = ' <video width="320" height="240" controls="controls">'+
+                                    '<source src="'+ $result.path+'" type="video/avi">'+
+                                    '<source src="'+ $result.path+'" type="video/mp4">'+
+                                    '</video>';
+                            $('#show-movie').html(html+"<input type='hidden' name='movie_path' value='" + $result.path + "' >");
                         }
                         alert($result.message);
                     },
                     error : function(){ }
                 });
-            });
+            }
         })
 
     </script>
