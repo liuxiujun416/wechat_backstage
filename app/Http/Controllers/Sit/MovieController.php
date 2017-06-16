@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Sit;
 
+use App\Model\Movie;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -13,6 +14,7 @@ class MovieController extends Controller
 
     public function index()
     {
-        return view('sit.movie.comedy');
+        $list = Movie::where('status',1)->orderby('created')->get()->toArray();
+        return view('sit.movie.comedy',['list'=>$list]);
     }
 }

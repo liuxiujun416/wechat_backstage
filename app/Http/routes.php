@@ -54,6 +54,7 @@ Route::group(['middleware' => ['web'],'namespace' => 'Admin','prefix' => 'admin'
         Route::get('index', 'MovieController@index');
         Route::get('add','MovieController@add');
         Route::post('add','MovieController@add');
+        Route::post('upload','MovieController@upload');
     });
 });
 
