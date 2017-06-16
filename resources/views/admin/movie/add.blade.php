@@ -68,7 +68,7 @@
                             <div class="control-group">
                                 <label class="control-label">电影</label>
                                 <div class="controls">
-                                    <input type="file" name="upload" />
+                                    <input type="file" name="upload-movie" />
                                     <button type="button"  class="btn btn-primary img">upload</button>
                                 </div>
                                 <div class="controls" id="show-movie">

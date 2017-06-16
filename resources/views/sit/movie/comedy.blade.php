@@ -214,14 +214,16 @@
 			<div class="w3_agile_latest_movies">
 			
 				<div id="owl-demo" class="owl-carousel owl-theme">
+					@if(!empty($list))
+					@foreach($list as $item)
 					<div class="item">
 						<div class="w3l-movie-gride-agile w3l-movie-gride-slider ">
-							<a href="single.html" class="hvr-sweep-to-bottom"><img src="images/m5.jpg" title="Movies Pro" class="img-responsive" alt=" " />
+							<a href="single.html" class="hvr-sweep-to-bottom"><img src="{{$item['img']}}" title="Movies Pro" class="img-responsive" alt=" " />
 								<div class="w3l-action-icon"><i class="fa fa-play-circle-o" aria-hidden="true"></i></div>
 							</a>
 							<div class="mid-1 agileits_w3layouts_mid_1_home">
 								<div class="w3l-movie-text">
-									<h6><a href="single.html">Storks	</a></h6>							
+									<h6><a href="single.html">{{$item['movie_name']}}</a></h6>
 								</div>
 								<div class="mid-2 agile_mid_2_home">
 									<p>2016</p>
@@ -242,6 +244,9 @@
 							</div>
 						</div>
 					</div>
+					@endforeach
+					@endif
+
 				    </div>
 				<!--//movies-->
 					</div>
