@@ -14,6 +14,25 @@
     <link rel="stylesheet" href="{{URL::asset('/css/unicorn.main.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('/css/fullcalendar.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('/css/unicorn.grey.css')}}" class="skin-color" />
+
+
+    <script src="{{URL::asset('/js/excanvas.min.js')}}"></script>
+    <script src="{{URL::asset('/js/jquery.min.js')}}"></script>
+    <script src="{{URL::asset('/js/jquery.ui.custom.js')}}"></script>
+    <script src="{{URL::asset('/js/bootstrap.min.js')}}"></script>
+    <script src="{{URL::asset('/js/jquery.flot.min.js')}}"></script>
+    <script src="{{URL::asset('/js/jquery.flot.resize.min.js')}}"></script>
+    <script src="{{URL::asset('/js/jquery.peity.min.js')}}"></script>
+    <script src="{{URL::asset('/js/fullcalendar.min.js')}}"></script>
+    <script src="{{URL::asset('/js/unicorn.js')}}"></script>
+    <script src="{{URL::asset('/js/unicorn.dashboard.js')}}"></script>
+    <script src="{{URL::asset('/js/bootstrap-colorpicker.js')}}"></script>
+    <script src="{{URL::asset('/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{URL::asset('/js/jquery.uniform.js')}}"></script>
+    <script src="{{URL::asset('/js/select2.min.js')}}"></script>
+    <script src="{{URL::asset('/js/unicorn.form_common.js')}}"></script>
+
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 
@@ -66,21 +85,7 @@
 
 
 
-<script src="{{URL::asset('/js/excanvas.min.js')}}"></script>
-<script src="{{URL::asset('/js/jquery.min.js')}}"></script>
-<script src="{{URL::asset('/js/jquery.ui.custom.js')}}"></script>
-<script src="{{URL::asset('/js/bootstrap.min.js')}}"></script>
-<script src="{{URL::asset('/js/jquery.flot.min.js')}}"></script>
-<script src="{{URL::asset('/js/jquery.flot.resize.min.js')}}"></script>
-<script src="{{URL::asset('/js/jquery.peity.min.js')}}"></script>
-<script src="{{URL::asset('/js/fullcalendar.min.js')}}"></script>
-<script src="{{URL::asset('/js/unicorn.js')}}"></script>
-<script src="{{URL::asset('/js/unicorn.dashboard.js')}}"></script>
-<script src="{{URL::asset('/js/bootstrap-colorpicker.js')}}"></script>
-<script src="{{URL::asset('/js/bootstrap-datepicker.js')}}"></script>
-<script src="{{URL::asset('/js/jquery.uniform.js')}}"></script>
-<script src="{{URL::asset('/js/select2.min.js')}}"></script>
-<script src="{{URL::asset('/js/unicorn.form_common.js')}}"></script>
+
 
 
 

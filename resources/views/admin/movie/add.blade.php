@@ -26,7 +26,7 @@
                             <h5>添加角色</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <form action="{{URL::to('/admin/role/add')}}" method="post" class="form-horizontal" />
+                            <form action="{{URL::to('/admin/movie/add')}}" method="post" id="data-form" class="form-horizontal" enctype="multipart/form-data" />
                             <div class="errors">
                                 @if(isset($errors) && count($errors)>0)
                                     <div class="box-body">
@@ -49,22 +49,37 @@
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">Radio inputs</label>
+                                <label class="control-label">状态</label>
                                 <div class="controls">
-                                    <label><input type="radio" name="0" /> 禁用</label>
-                                    <label><input type="radio" name="1" />启用</label>
+                                    <label><input type="radio" name="status"  value="0" /> 禁用</label>
+                                    <label><input type="radio" name="status" selected="true"  value="1" />启用</label>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">File upload input</label>
+                                <label class="control-label">图片</label>
                                 <div class="controls">
-                                    <input type="file" />
+                                    <input type="file"  name="upload-img" />
+                                    <button type="button"  class="btn btn-primary img">upload</button>
+                                </div>
+                                <div class="controls" id="show-img">
+                                    <input type='hidden' name='img' value='' >
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">File upload input</label>
+                                <label class="control-label">电影</label>
                                 <div class="controls">
-                                    <input type="file" />
+                                    <input type="file" name="upload" />
+                                    <button type="button"  class="btn btn-primary img">upload</button>
+                                </div>
+                                <div class="controls" id="show-movie">
+                                    <input type='hidden' name='movie_path' value='' >
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"></label>
+                                <div class="controls">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-primary">Return</button>
                                 </div>
                             </div>
                             </form>
@@ -79,5 +94,41 @@
             </div>
         </div>
     </div>
+
+    <script src="{{URL::asset('/js/jquery.min.js')}}"></script>
+
+    <script type="text/javascript">
+
+        $(function(){
+            $(".img").on('click',function(){
+                var formdata=new FormData($("#data-form")[0]); //获取文件法一
+
+                $.ajax({
+                    type : 'post',
+                    url : '/admin/movie/upload',
+                    data : formdata,
+                    cache : false,
+                    processData : false, // 不处理发送的数据，因为data值是Formdata对象，不需要对数据做处理
+                    contentType : false, // 不设置Content-type请求头
+                    success : function($result){
+                        if($result.status) {
+                            if($result.type != 'video/mp4') {
+                                $('#show-img').html("<img src='" + $result.path + "' ><input type='hidden' name='img' value='" + $result.path + "' >");
+                            }else {
+                                var html = ' <video width="320" height="240" controls="controls">'+
+                                        '<source src="'+ $result.path+'" type="video/avi">'+
+                                        '<source src="'+ $result.path+'" type="video/mp4">'+
+                                        '</video>';
+                                        $('#show-movie').html(html+"<input type='hidden' name='movie_path' value='" + $result.path + "' >");
+                            }
+                        }
+                         alert($result.message);
+                    },
+                    error : function(){ }
+                });
+            });
+        })
+
+    </script>
 @endsection
 
