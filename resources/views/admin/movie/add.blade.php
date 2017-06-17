@@ -58,8 +58,8 @@
                             <div class="control-group">
                                 <label class="control-label">图片</label>
                                 <div class="controls">
-                                    <input type="file"  name="upload-img" />
-                                    <button type="button"  class="btn btn-primary img">upload</button>
+                                    <button type="button" class="btn btn-primary"  id="select-img">select file</button>
+                                    <button type="button"  class="btn btn-primary load-file">upload</button>
                                 </div>
                                 <div class="controls" id="show-img">
                                     <input type='hidden' name='img' value='' >
@@ -68,7 +68,8 @@
                             <div class="control-group">
                                 <label class="control-label">电影</label>
                                 <div class="controls">
-                                    <button type="button"  class="btn btn-primary movie">upload</button>
+                                    <button type="button" class="btn btn-primary" id="select-movie" >select file</button>
+                                    <button type="button"  class="btn btn-primary load-file">upload</button>
                                 </div>
                                 <div class="controls" id="show-movie">
                                     <input type='hidden' name='movie_path' value='' >
@@ -82,8 +83,11 @@
                                 </div>
                             </div>
                             </form>
-                            <form id="data-upload" class="form-horizontal" enctype="multipart/form-data"  style="display: none; " >
-                                <input type="file" name="upload-movie" id="upload-file" />
+                            <form id="upload-img" class="form-horizontal" enctype="multipart/form-data"  style="display: none; " >
+                                <input type="file" name="upload-img" id="upload-file-img" />
+                            </form>
+                            <form id="upload-movie" class="form-horizontal" enctype="multipart/form-data"  style="display: none; " >
+                                <input type="file" name="upload-movie" id="upload-file-movie" />
                             </form>
                         </div>
                     </div>
@@ -98,70 +102,108 @@
     </div>
 
     <script src="{{URL::asset('/js/jquery.min.js')}}"></script>
-
+    <script src="{{URL::asset('/js/ajaxfileupload.js')}}"></script>
     <script type="text/javascript">
 
         $(function(){
-            $(".img").on('click',function(){
-                var formdata=new FormData($("#data-form")[0]); //获取文件法一
 
+            var file_id = '';
+            $("#select-img").click(function(){
+                $("#upload-file-img").click();
+                file_id = 'upload-file-img';
+            });
+
+            $("#select-movie").click(function(){
+                $("#upload-file-movie").click();
+                file_id = 'upload-file-movie';
+            });
+
+
+
+            $(".load-file").click(function () {
+                ajaxFileUpload();
+            })
+
+
+
+            function ajaxFileUpload() {
+                var formData = new FormData();
+                formData.append("file", document.getElementById(file_id).files[0]);
                 $.ajax({
-                    type : 'post',
-                    url : '/admin/movie/uploadimg',
-                    data : formdata,
-                    cache : false,
-                    processData : false, // 不处理发送的数据，因为data值是Formdata对象，不需要对数据做处理
-                    contentType : false, // 不设置Content-type请求头
-                    success : function($result){
+                    url: '/admin/movie/upload',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function ($result) {
                         if($result.status) {
-                            if($result.type != 'video/mp4') {
+
+                            if($result.type == 'image/jpeg') {
                                 $('#show-img').html("<img src='" + $result.path + "' ><input type='hidden' name='img' value='" + $result.path + "' >");
-                            }else {
-                                var html = ' <video width="320" height="240" controls="controls">'+
-                                        '<source src="'+ $result.path+'" type="video/avi">'+
-                                        '<source src="'+ $result.path+'" type="video/mp4">'+
+                            } else {
+                                var html = ' <video width="700" height="300" controls="controls">' +
+                                        '<source src="' + $result.path + '" type="video/avi">' +
+                                        '<source src="' + $result.path + '" type="video/mp4">' +
                                         '</video>';
-                                        $('#show-movie').html(html+"<input type='hidden' name='movie_path' value='" + $result.path + "' >");
+                                $('#show-movie').html(html + "<input type='hidden' name='movie_path' value='" + $result.path + "' >");
                             }
                         }
-                         alert($result.message);
                     },
-                    error : function(){ }
-                });
-            });
-
-
-            $(".movie").on('click',function() {
-                 $('#upload-file').click();
-                if($('#upload-file').val()){
-                    uploadmovie();
-                }
-                $('#upload-file').val('');
-            });
-            function uploadmovie(){
-                var formdata=new FormData($("#data-upload")[0]); //获取文件法一
-
-                $.ajax({
-                    type : 'post',
-                    url : '/admin/movie/uploadmovie',
-                    data : formdata,
-                    cache : false,
-                    processData : false, // 不处理发送的数据，因为data值是Formdata对象，不需要对数据做处理
-                    contentType : false, // 不设置Content-type请求头
-                    success : function($result){
-                        if($result.status) {
-                            var html = ' <video width="320" height="240" controls="controls">'+
-                                    '<source src="'+ $result.path+'" type="video/avi">'+
-                                    '<source src="'+ $result.path+'" type="video/mp4">'+
-                                    '</video>';
-                            $('#show-movie').html(html+"<input type='hidden' name='movie_path' value='" + $result.path + "' >");
-                        }
-                        alert($result.message);
-                    },
-                    error : function(){ }
+                    error: function () {
+                        alert("上传失败！");
+                        $("#imgWait").hide();
+                    }
                 });
             }
-        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function ajaxFileUpload1() {
+            $.ajaxFileUpload
+            (
+                    {
+                        url: '/admin/movie/uploadmovie', //用于文件上传的服务器端请求地址
+                        secureuri: false, //是否需要安全协议，一般设置为false
+                        fileElementId: file_id, //文件上传域的ID
+                        dataType: 'json', //返回值类型 一般设置为json
+                        success: function ($result, status)  //服务器成功响应处理函数
+                        {
+                            if($result.status) {
+
+                                if($result.type == 'image/jpeg') {
+                                    $('#show-img').html("<img src='" + $result.path + "' ><input type='hidden' name='img' value='" + $result.path + "' >");
+
+                                } else {
+
+                                    var html = ' <video width="320" height="240" controls="controls">' +
+                                            '<source src="' + $result.path + '" type="video/avi">' +
+                                            '<source src="' + $result.path + '" type="video/mp4">' +
+                                            '</video>';
+                                    $('#show-movie').html(html + "<input type='hidden' name='movie_path' value='" + $result.path + "' >");
+                                }
+                            }
+                        },
+                        error: function (data, status, e)//服务器响应失败处理函数
+                        {
+                            alert(e);
+                        }
+                    }
+            )
+            file_id = '';
+            return false;
+
+        }
+      })
 
     </script>
 @endsection
