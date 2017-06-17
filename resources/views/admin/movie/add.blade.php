@@ -59,7 +59,7 @@
                                 <label class="control-label">图片</label>
                                 <div class="controls">
                                     <button type="button" class="btn btn-primary"  id="select-img">select file</button>
-                                    <button type="button"  class="btn btn-primary load-file">upload</button>
+                                    <button type="button"  data-url="{{URL::to('/admin/movie/upload')}}"  class="btn btn-primary load-file">upload</button>
                                 </div>
                                 <div class="controls" id="show-img">
                                     <input type='hidden' name='img' value='' >
@@ -69,7 +69,7 @@
                                 <label class="control-label">电影</label>
                                 <div class="controls">
                                     <button type="button" class="btn btn-primary" id="select-movie" >select file</button>
-                                    <button type="button"  class="btn btn-primary load-file">upload</button>
+                                    <button type="button" data-url="{{URL::to('/admin/movie/uploadmovie')}}" class="btn btn-primary load-file">upload</button>
                                 </div>
                                 <div class="controls" id="show-movie">
                                     <input type='hidden' name='movie_path' value='' >
@@ -102,43 +102,41 @@
     </div>
 
     <script src="{{URL::asset('/js/jquery.min.js')}}"></script>
-    <script src="{{URL::asset('/js/ajaxfileupload.js')}}"></script>
     <script type="text/javascript">
 
-        $(function(){
+        $(function() {
 
             var file_id = '';
-            $("#select-img").click(function(){
+            $("#select-img").click(function () {
                 $("#upload-file-img").click();
                 file_id = 'upload-file-img';
             });
 
-            $("#select-movie").click(function(){
+            $("#select-movie").click(function () {
                 $("#upload-file-movie").click();
                 file_id = 'upload-file-movie';
             });
 
 
-
             $(".load-file").click(function () {
-                ajaxFileUpload();
+              var url =  $(this).attr('data-url');
+                ajaxFileUpload(url);
             })
 
 
-
-            function ajaxFileUpload() {
+            function ajaxFileUpload(url) {
                 var formData = new FormData();
                 formData.append("file", document.getElementById(file_id).files[0]);
                 $.ajax({
-                    url: '/admin/movie/upload',
+                    url: url,
                     type: 'POST',
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function ($result) {
-                        if($result.status) {
+                        if ($result.status) {
 
-                            if($result.type == 'image/jpeg') {
+                            if ($result.type == 'image/jpeg') {
                                 $('#show-img').html("<img src='" + $result.path + "' ><input type='hidden' name='img' value='" + $result.path + "' >");
                             } else {
                                 var html = ' <video width="700" height="300" controls="controls">' +
@@ -155,55 +153,7 @@
                     }
                 });
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        function ajaxFileUpload1() {
-            $.ajaxFileUpload
-            (
-                    {
-                        url: '/admin/movie/uploadmovie', //用于文件上传的服务器端请求地址
-                        secureuri: false, //是否需要安全协议，一般设置为false
-                        fileElementId: file_id, //文件上传域的ID
-                        dataType: 'json', //返回值类型 一般设置为json
-                        success: function ($result, status)  //服务器成功响应处理函数
-                        {
-                            if($result.status) {
-
-                                if($result.type == 'image/jpeg') {
-                                    $('#show-img').html("<img src='" + $result.path + "' ><input type='hidden' name='img' value='" + $result.path + "' >");
-
-                                } else {
-
-                                    var html = ' <video width="320" height="240" controls="controls">' +
-                                            '<source src="' + $result.path + '" type="video/avi">' +
-                                            '<source src="' + $result.path + '" type="video/mp4">' +
-                                            '</video>';
-                                    $('#show-movie').html(html + "<input type='hidden' name='movie_path' value='" + $result.path + "' >");
-                                }
-                            }
-                        },
-                        error: function (data, status, e)//服务器响应失败处理函数
-                        {
-                            alert(e);
-                        }
-                    }
-            )
-            file_id = '';
-            return false;
-
-        }
-      })
+        })
 
     </script>
 @endsection
