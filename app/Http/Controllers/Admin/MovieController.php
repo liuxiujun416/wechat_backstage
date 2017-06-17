@@ -66,9 +66,16 @@ class MovieController extends Controller
             mkdir($savePath, 777, true);
         }
         $savePath .= $newFileName;
-        file_put_contents($savePath,file_get_contents($file->getRealPath()));
+        if($file->getClientOriginalExtension() == 'mp4') {
+            $ftp = new FtpController('47.93.33.115',21,'root','@liu416115');     // 打开FTP连接
+           // $ftp_path = '/yjdata/www/wechat_backstage/public/upload/movie/';
+            $ftp->up_file($file->getRealPath(),$savePath);     // 上传文件
+            $ftp->close();                       // 关闭FTP连接
+        }else {
+            file_put_contents($savePath, file_get_contents($file->getRealPath()));
+        }
         if(!file_exists($savePath)) {
-            return response(['status'=>0,'path'=>'/','message'=>'保存文件失败！']);
+            return response(['status'=>0,'path'=>'','type'=>$file->getMimeType(),'message'=>'保存文件失败！']);
         }
         return response(['status'=>1,'path'=>ltrim($savePath,'.'),'type'=>$file->getMimeType(),'message'=>'保存文件成功！']);
     }

@@ -52,7 +52,7 @@
                                 <label class="control-label">状态</label>
                                 <div class="controls">
                                     <label><input type="radio" name="status"  value="0" /> 禁用</label>
-                                    <label><input type="radio" name="status" selected="true"  value="1" />启用</label>
+                                    <label><input type="radio" name="status" checked="checked"  value="1" />启用</label>
                                 </div>
                             </div>
                             <div class="control-group">
