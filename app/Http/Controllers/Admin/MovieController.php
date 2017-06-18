@@ -84,7 +84,7 @@ class MovieController extends Controller
     {
         $file = $_FILES['file'];
 
-        $newFileName = md5(time().rand(0,10000)).'.'.substr($file['name'],strpos($file['name'],'.'));
+        $newFileName = md5(time().rand(0,10000)).substr($file['name'],strpos($file['name'],'.'));
 
         $savePath = './upload/';
         $savePath .= $newFileName;

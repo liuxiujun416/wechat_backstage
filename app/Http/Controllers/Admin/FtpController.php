@@ -36,7 +36,8 @@ class FtpController extends Controller
      */
     function up_file($path,$newpath,$type=true)
     {
-        if($type) $this->dir_mkdirs($newpath);
+
+        if($type) $newpath = $this->dir_mkdirs($newpath);
         $this->off = ftp_put($this->conn_id,$newpath,$path,FTP_BINARY);
         if(!$this->off) echo "文件上传失败,请检查权限及路径是否正确！";
     }
@@ -88,11 +89,12 @@ class FtpController extends Controller
         $path_arr = explode('/',$path);       // 取目录数组
         $file_name = array_pop($path_arr);      // 弹出文件名
         $path_div = count($path_arr);        // 取层数
-
+        $new_path = '';
         foreach($path_arr as $val)          // 创建目录
         {
-            if(ftp_chdir($this->conn_id,$val) == true && $val != '.')
-            {  if(!is_dir($val)) {
+            if(ftp_chdir($this->conn_id,$val) == false && $val != '.')
+            {
+                if(!is_dir($val)) {
                 $tmp = ftp_mkdir($this->conn_id, $val);
                 if ($tmp == FALSE) {
                     echo "目录创建失败,请检查权限及路径是否正确！";
@@ -101,12 +103,16 @@ class FtpController extends Controller
                 ftp_chdir($this->conn_id, $val);
                 }
             }
+
+            $new_path = ftp_pwd($this->conn_id);
         }
 
         for($i=1;$i<=$path_div;$i++)         // 回退到根
         {
             @ftp_cdup($this->conn_id);
         }
+
+        return $new_path . '/' . $file_name;
     }
 
     /**
