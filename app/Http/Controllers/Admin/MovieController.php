@@ -82,6 +82,25 @@ class MovieController extends Controller
 
     public function uploadMovie(Request $request)
     {
+
+       // ;脚本解析输入数据(类似 POST 和 GET)允许的最大时间，单位是秒。 它从接收所有数据到开始执行脚本进行测量的。
+      ini_set("max_input_time","12000");
+
+      //;允许客户端单个POST请求发送的最大数据
+
+        ini_set("post_max_size" ,"2000M");
+    //;是否开启文件上传功能
+     //file_uploads = On
+
+  //;文件上传的临时存放目录(如果不指定，使用系统默认的临时目录)
+   // ;upload_tmp_dir =
+
+ //;允许单个请求上传的最大文件大小
+  ini_set("upload_max_filesize", "2000M");
+
+   // ;允许单个POST请求同时上传的最大文件数量
+   ini_set("max_file_uploads","100");
+
         $file = $_FILES['file'];
 
         $newFileName = md5(time().rand(0,10000)).substr($file['name'],strpos($file['name'],'.'));

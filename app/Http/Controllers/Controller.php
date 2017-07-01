@@ -37,7 +37,7 @@ class Controller extends BaseController
                     }
                     if($val['controller'] == $urlArr['1'] &&  $value['menu_id'] == $val['pid'] ) {
                         $className = 'submenu active open';
-                    } 
+                    }
                 }
                 $childHtml .='</ul>';
 
@@ -52,4 +52,11 @@ class Controller extends BaseController
         $html .= "</ul>";
         view()->share('menu_list',$html);
     }
+
+    private  function checklogin()
+    {
+
+    }
+
+
 }
