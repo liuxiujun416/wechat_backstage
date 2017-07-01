@@ -68,13 +68,22 @@
                             <div class="control-group">
                                 <label class="control-label">电影</label>
                                 <div class="controls">
+                                    <input type="text" data-color="#000000" name="movie_path"  class=" input-small" />
+                                </div>
+                                <div class="controls" id="show-movie">
+                                    <input type='hidden' name='movie_path' value='' >
+                                </div>
+                            </div>
+                          <!--  <div class="control-group">
+                                <label class="control-label">电影</label>
+                                <div class="controls">
                                     <button type="button" class="btn btn-primary" id="select-movie" >select file</button>
                                     <button type="button" data-url="{{URL::to('/admin/movie/uploadmovie')}}" class="btn btn-primary load-file">upload</button>
                                 </div>
                                 <div class="controls" id="show-movie">
                                     <input type='hidden' name='movie_path' value='' >
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="control-group">
                                 <label class="control-label"></label>
                                 <div class="controls">
