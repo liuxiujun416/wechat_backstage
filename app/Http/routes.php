@@ -42,7 +42,11 @@ Route::group(['middleware' => ['web'],'namespace' => 'Admin','prefix' => 'admin'
     Route::group(['prefix' => 'index'], function () {
         Route::get('index', 'IndexController@index');
     });
-
+    Route::group(['prefix' => 'access'], function () {
+        Route::get('index', 'AccessController@index');
+        Route::post('ajax', 'AccessController@ajax');
+        Route::post('save', 'AccessController@save');
+    });
     Route::group(['prefix' => 'role'], function () {
         Route::get('index', 'RoleController@index');
         Route::get('add','RoleController@add');
