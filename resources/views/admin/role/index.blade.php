@@ -46,7 +46,9 @@
                                     <td>{{$value['role_name']}}</td>
                                     <td>{{ date('Y-m-d H:i',$value['created']) }}</td>
                                     <td>{{$value['status']}}</td>
-                                    <td>Row 4</td>
+                                    <td> <a href="{{URL('/admin/access/add')}}" class="btn" >权限</a>
+                                        <a href="{{URL('/admin/access/add')}}" class="btn" >添加用户</a>
+                                    </td>
                                 </tr>
                                @endforeach
                             @endif
