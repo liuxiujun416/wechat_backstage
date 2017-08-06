@@ -2,8 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use ClassPreloader\Config;
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class Authenticate
 {
@@ -17,13 +20,10 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-
-        if (Auth::guard($guard)->guest()) {
-            if ($request->ajax() || $request->wantsJson()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('login');
-            }
+         $toUrl = 'admin/login/index';
+         $domain = config('app.url') . '/' .$toUrl;
+        if(Session::get('user') && Session::get('_previous.url') != $domain) {
+           return Redirect::to($toUrl);
         }
 
         return $next($request);

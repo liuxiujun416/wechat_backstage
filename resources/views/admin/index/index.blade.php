@@ -1,5 +1,6 @@
 @extends('admin.layout.layout')
 @section('content')
+    <div id="content">
     <div id="content-header">
         <h1>控制台</h1>
         <div class="btn-group">
@@ -81,5 +82,5 @@
                 2012 &copy; UniAdmin. </div>
         </div>
     </div>
-
+    </div>
 @endsection
