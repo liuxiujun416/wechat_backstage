@@ -1,7 +1,8 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2017/8/13
- * Time: 20:02
- */
+<html>
+<head>
+    <title>test</title>
+</head>
+<body>
+{$content}
+</body>
+</html>

@@ -53,9 +53,50 @@ class Controller extends BaseController
         view()->share('menu_list',$html);
     }
 
-    private  function checklogin()
+    public function httpRequest($url='',$type='get',$data=[])
     {
 
+        if($url) {
+            $ch = curl_init();
+            curl_setopt($ch,CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_SAFE_UPLOAD, false);
+            if (stripos( $url, "https://" ) !== FALSE) {
+                curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, FALSE );
+                curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, false );
+            }
+
+            curl_setopt($ch, CURLOPT_URL, $url );
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+            if($type == 'post') {
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            }
+            $sContent = curl_exec ($ch);
+            $aStatus = curl_getinfo ($ch);
+            curl_close ( $ch);
+            if (intval ( $aStatus ["http_code"] ) == 200) {
+                return $sContent;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    protected function getAccessToken()
+    {
+        $credential = 'client_credential';
+        $appid = 'wxa1e866bd690c001b';
+        $appsecret = '4f0d59a22b729d17ebc1263e299c7a8b';
+
+
+
+       // $appid="wx8304ad33eda1cbfe";
+        //$appsecret = "48f9a8342d4db04cb7b9abe1d4bc99b7";
+        $url = sprintf("https://api.weixin.qq.com/cgi-bin/token?grant_type=%s&appid=%s&secret=%s",$credential,$appid,$appsecret);
+        $result = $this->httpRequest($url);
+        $result = json_decode($result,true);
+        return $result['access_token'];
     }
 
 

@@ -12,22 +12,8 @@
 */
 
 Route::get('/', function () {
-    	$nonce     = isset($_GET['nonce'])     ? $_GET['nonce']     : '';
-		$token     = "liuxiujun";
-		$timestamp = isset($_GET['timestamp']) ? $_GET['timestamp'] : '';
-		$echostr   = isset($_GET['echostr'])   ? $_GET['echostr']   : '';
-		$signature = isset($_GET['signature']) ? $_GET['signature'] : '';
-		//形成数组，然后按字典序排序
-		$array = array();
-		$array = array($nonce, $timestamp, $token);
-		sort($array);
-		//拼接成字符串,sha1加密 ，然后与signature进行校验
-		$str = sha1( implode( $array ) );
-		if( $str == $signature && $echostr ){
-			//第一次接入weixin api接口的时候
-			echo  $echostr;
-			
-		} 
+	
+
 });
 
 
@@ -43,9 +29,7 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+
 
 
 
@@ -78,11 +62,50 @@ Route::group(['middleware' => ['web'],'namespace' => 'Admin','prefix' => 'admin'
         Route::post('upload','MovieController@upload');
         Route::post('uploadmovie','MovieController@uploadMovie');
     });
+
+    Route::group(['prefix' => 'media'], function () {
+        Route::get('index', 'MediaController@index');
+        Route::get('add', 'MediaController@add');
+        Route::post('add', 'MediaController@add');
+        Route::post('upload', 'MediaController@upload');
+        Route::get('send', 'MediaController@sendInfo');
+    });
+
+    Route::group(['prefix' => 'video'], function () {
+        Route::get('index', 'VideoController@index');
+        Route::get('add', 'VideoController@add');
+        Route::post('add', 'VideoController@add');
+        Route::post('upload', 'VideoController@upload');
+    });
 });
 
 
 Route::group(['namespace' => 'Sit','prefix' => 'movie'], function () {
         Route::get('index', 'MovieController@index');
+});
+
+
+Route::group(['namespace' => 'Sit','prefix' => 'media'], function () {
+    Route::get('index', 'MediaController@index');
+});
+
+
+Route::group(['namespace' => 'Sit','prefix' => '/'], function () {
+        Route::get('index', 'IndexController@index');
+        Route::post('index', 'IndexController@index');
+});
+
+Route::group(['namespace' => 'Sit','prefix' => 'blog'], function () {
+    Route::get('index', 'BlogController@index');
+    Route::get('archive', 'BlogController@archive');
+    Route::get('contact', 'BlogController@contact');
+    Route::get('single', 'BlogController@single');
+});
+
+
+Route::group(['namespace' => 'Sit','prefix' => 'video'], function () {
+    Route::get('index', 'VideoController@index');
+    Route::get('single', 'VideoController@single');
 });
 
 

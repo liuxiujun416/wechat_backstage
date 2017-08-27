@@ -22,7 +22,7 @@ class Authenticate
     {
          $toUrl = 'admin/login/index';
          $domain = config('app.url') . '/' .$toUrl;
-        if(Session::get('user') && Session::get('_previous.url') != $domain) {
+        if(!Session::get('user') && Session::get('_previous.url') != $domain) {
            return Redirect::to($toUrl);
         }
 

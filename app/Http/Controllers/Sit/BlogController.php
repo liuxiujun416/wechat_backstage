@@ -9,7 +9,30 @@
 namespace App\Http\Controllers\Sit;
 
 
-class BlogController
+use App\Http\Controllers\Controller;
+
+class BlogController extends Controller
 {
+
+    public function index()
+    {
+        return view('sit.blog.index');
+    }
+
+    public function archive()
+    {
+        return view('sit.blog.archive');
+    }
+
+    public function contact()
+    {
+        return view('sit.blog.contact');
+    }
+
+    public function single()
+    {
+        return view('sit.blog.single');
+    }
+
 
 }
