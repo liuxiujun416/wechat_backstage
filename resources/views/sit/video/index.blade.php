@@ -4,18 +4,18 @@
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="My Play Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <meta name="keywords" content="My  LG, SonyErricsson, Motorola web design" />
     <!-- bootstrap -->
-    <link href="{{URL::asset('video/css/bootstrap.min.css')}}" rel='stylesheet' type='text/css' media="all" />
+    <link href="{{asset('/videos/css/bootstrap.min.css')}}" rel='stylesheet' type='text/css'  />
     <!-- //bootstrap -->
-    <link href="{{URL::asset('video/css/dashboard.css')}}" rel="stylesheet">
+    <link href="{{asset('/videos/css/dashboard.css')}}" rel="stylesheet">
     <!-- Custom Theme files -->
-    <link href="{{URL::asset('video/css/style.css')}}" rel='stylesheet' type='text/css' media="all" />
-    <script src="{{URL::asset('video/js/jquery-1.11.1.min.js')}}"></script>
-    <!--start-smoth-scrolling-->
-    <!-- fonts -->
+    <link href="{{asset('/videos/css/style.css')}}" rel='stylesheet' type='text/css'  />
+
+    <script type="text/javascript" src="{{asset('/videos/js/modernizr.custom.min.js')}}"></script>
+    <link href="{{asset('/videos/css/popuo-box.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <script src="{{asset('/videos/js/jquery.magnific-popup.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/videos/js/html5media.min.js')}}" type="text/javascript"></script>
 
     <!-- //fonts -->
 </head>
@@ -30,7 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"><h1><img src="images/logo.png" alt="" /></h1></a>
+            <a class="navbar-brand" href="index.html"><h1><img src="{{URL::asset('/videos/images/logo.png')}}" alt="" /></h1></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <div class="top-search">
@@ -46,9 +46,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="signin">
                     <a href="#small-dialog2" class="play-icon popup-with-zoom-anim">Sign Up</a>
                     <!-- pop-up-box -->
-                    <script type="text/javascript" src="js/modernizr.custom.min.js"></script>
-                    <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
-                    <script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+
                     <!--//pop-up-box -->
                     <div id="small-dialog2" class="mfp-hide">
                         <h3>Create Account</h3>
@@ -177,7 +175,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="top-navigation">
         <div class="t-menu">MENU</div>
         <div class="t-img">
-            <img src="images/lines.png" alt="" />
+            <img src="{{asset('videos/images/lines.png')}}" alt="" />
         </div>
         <div class="clearfix"> </div>
     </div>
@@ -214,9 +212,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="recommended-info">
                 <h3>Recent Videos</h3>
             </div>
+            @foreach($lists as $list)
             <div class="col-md-4 resent-grid recommended-grid slider-top-grids">
                 <div class="resent-grid-img recommended-grid-img">
-                    <a href="single.html"><img src="images/t1.jpg" alt="" /></a>
+                    <a href="{{URL("video/single",[$list->video_id])}}"><img src="{{$list->icon}}" alt="" /></a>
                     <div class="time">
                         <p>3:04</p>
                     </div>
@@ -225,49 +224,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>
                 <div class="resent-grid-info recommended-grid-info">
-                    <h3><a href="single.html" class="title title-info">Pellentesque vitae pulvinar tortor nullam interdum metus a imperdiet</a></h3>
+                    <h3><a href="single.html" class="title title-info">{{$list->name}}</a></h3>
                     <ul>
                         <li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
                         <li class="right-list"><p class="views views-info">2,114,200 views</p></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-4 resent-grid recommended-grid slider-top-grids">
-                <div class="resent-grid-img recommended-grid-img">
-                    <a href="single.html"><img src="images/t2.jpg" alt="" /></a>
-                    <div class="time">
-                        <p>7:23</p>
-                    </div>
-                    <div class="clck">
-                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                    </div>
-                </div>
-                <div class="resent-grid-info recommended-grid-info">
-                    <h3><a href="single.html" class="title title-info">Interdum pellentesque vitae pulvinar tortor nullam metus a imperdiet</a></h3>
-                    <ul>
-                        <li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-                        <li class="right-list"><p class="views views-info">4,200 views</p></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-4 resent-grid recommended-grid slider-top-grids">
-                <div class="resent-grid-img recommended-grid-img">
-                    <a href="single.html"><img src="images/t3.jpg" alt="" /></a>
-                    <div class="time">
-                        <p>4:04</p>
-                    </div>
-                    <div class="clck">
-                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                    </div>
-                </div>
-                <div class="resent-grid-info recommended-grid-info">
-                    <h3><a href="single.html" class="title title-info">Nullam interdum metus a imperdiet pellentesque vitae pulvinar tortor</a></h3>
-                    <ul>
-                        <li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
-                        <li class="right-list"><p class="views views-info">71,174 views</p></li>
-                    </ul>
-                </div>
-            </div>
+            @endforeach
+
             <div class="clearfix"> </div>
         </div>
 
@@ -277,7 +242,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/bootstrap.min.js"></script>
+
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 </body>
 </html>

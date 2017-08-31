@@ -2,18 +2,21 @@
 <html>
 <head>
     <title>single</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="My Play Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <meta name="keywords" content="My Pemplate SonyErricsson, Motorola web design" />
+
     <!-- bootstrap -->
-    <link href="{{URL::asset('video/css/bootstrap.min.css')}}" rel='stylesheet' type='text/css' media="all" />
+    <link href="{{asset('/videos/css/bootstrap.min.css')}}" rel='stylesheet' type='text/css'  />
     <!-- //bootstrap -->
-    <link href="{{URL::asset('video/css/dashboard.css')}}" rel="stylesheet">
+    <link href="{{asset('/videos/css/dashboard.css')}}" rel="stylesheet">
     <!-- Custom Theme files -->
-    <link href="{{URL::asset('video/css/style.css')}}" rel='stylesheet' type='text/css' media="all" />
-    <script src="{{URL::asset('video/js/jquery-1.11.1.min.js')}}"></script>
+    <link href="{{asset('/videos/css/style.css')}}" rel='stylesheet' type='text/css'  />
+
+    <script type="text/javascript" src="{{asset('/videos/js/modernizr.custom.min.js')}}"></script>
+    <link href="{{asset('/videos/css/popuo-box.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <script src="{{asset('/videos/js/jquery.magnific-popup.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/videos/js/html5media.min.js')}}" type="text/javascript"></script>
 
 </head>
 <body>
@@ -27,7 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"><h1><img src="images/logo.png" alt="" /></h1></a>
+            <a class="navbar-brand" href="index.html"><h1><img src="{{asset('/videos/images/logo.png')}}" alt="" /></h1></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <div class="top-search">
@@ -43,9 +46,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="signin">
                     <a href="#small-dialog2" class="play-icon popup-with-zoom-anim">Sign Up</a>
                     <!-- pop-up-box -->
-                    <script type="text/javascript" src="js/modernizr.custom.min.js"></script>
-                    <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
-                    <script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+
                     <!--//pop-up-box -->
                     <div id="small-dialog2" class="mfp-hide">
                         <h3>Create Account</h3>
@@ -213,26 +214,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="song-info">
                     <h3>Etiam molestie nisl eget consequat pharetra</h3>
                 </div>
+
                 <div class="video-grid">
-                    <iframe src="https://www.youtube.com/embed/oYiT-vLjhC4" allowfullscreen></iframe>
+
+
+                        <video class="video" poster="{{asset($list->icon)}}" width="628" height="347" controls preload>
+                            <source src="{{asset($list->path)}}" media="only screen and (min-device-width: 668px)"></source>
+                            <source src="{{asset($list->path)}}" media="only screen and (max-device-width: 668px)"></source>
+                            <source src="//media.html5media.info/video.ogv"></source>
+                        </video>
+
+
+
                 </div>
             </div>
 
-            <div class="song-grid-right">
-                <div class="share">
-                    <h5>Share this</h5>
-                    <ul>
-                        <li><a href="#" class="icon fb-icon">Facebook</a></li>
-                        <li><a href="#" class="icon dribbble-icon">Dribbble</a></li>
-                        <li><a href="#" class="icon twitter-icon">Twitter</a></li>
-                        <li><a href="#" class="icon pinterest-icon">Pinterest</a></li>
-                        <li><a href="#" class="icon whatsapp-icon">Whatsapp</a></li>
-                        <li><a href="#" class="icon like">Like</a></li>
-                        <li><a href="#" class="icon comment-icon">Comments</a></li>
-                        <li class="view">200 Views</li>
-                    </ul>
-                </div>
-            </div>
 
             <div class="clearfix"> </div>
             <div class="published">
@@ -332,7 +328,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{{asset('/videos/js/jquery-1.11.1.min.js')}}"></script>
+<script src="{{asset('/video/js/bootstrap.min.js')}}"></script>
+
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 </body>
 </html>

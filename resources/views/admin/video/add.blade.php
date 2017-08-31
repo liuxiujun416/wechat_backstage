@@ -26,7 +26,7 @@
                             <h5>添加角色</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <form action="{{URL::to('/admin/movie/add')}}" method="post" id="data-form" class="form-horizontal" enctype="multipart/form-data" />
+                            <form action="{{URL::to('/admin/video/add')}}" method="post" id="data-form" class="form-horizontal" enctype="multipart/form-data" />
                             <div class="errors">
                                 @if(isset($errors) && count($errors)>0)
                                     <div class="box-body">
@@ -45,14 +45,7 @@
                             <div class="control-group">
                                 <label class="control-label">电影名称</label>
                                 <div class="controls">
-                                    <input type="text" data-color="#000000" name="movie_name"  class=" input-small" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">状态</label>
-                                <div class="controls">
-                                    <label><input type="radio" name="status"  value="0" /> 禁用</label>
-                                    <label><input type="radio" name="status" checked="checked"  value="1" />启用</label>
+                                    <input type="text" data-color="#000000" name="name"  class=" input-small" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -68,10 +61,7 @@
                             <div class="control-group">
                                 <label class="control-label">电影</label>
                                 <div class="controls">
-                                    <input type="text" data-color="#000000" name="movie_path"  class=" input-small" />
-                                </div>
-                                <div class="controls" id="show-movie">
-                                    <input type='hidden' name='movie_path' value='' >
+                                    <input type="text" data-color="#000000" name="path"  class=" input-small" />
                                 </div>
                             </div>
                         <!--  <div class="control-group">
