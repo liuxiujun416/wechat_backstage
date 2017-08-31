@@ -105,7 +105,7 @@ Route::group(['namespace' => 'Sit','prefix' => 'blog'], function () {
 
 Route::group(['namespace' => 'Sit','prefix' => 'video'], function () {
     Route::get('index', 'VideoController@index');
-    Route::get('single', 'VideoController@single');
+    Route::get('single/{id}', 'VideoController@single');
 });
 
 

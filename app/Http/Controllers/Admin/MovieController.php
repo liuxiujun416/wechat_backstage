@@ -21,6 +21,7 @@ class MovieController extends Controller
     public function index()
     {
         $list = Movie::where('status',1)->get();
+
         return view("admin.movie.index",['list'=>$list]);
     }
 

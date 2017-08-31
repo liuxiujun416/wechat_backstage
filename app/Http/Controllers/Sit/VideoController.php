@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Sit;
 
+use App\Model\Video;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,13 +17,14 @@ class VideoController extends Controller
     }
     public function index()
     {
-       // echo "hello";
-       return view('sit.video.index');
+       $lists = Video::where('deleted',1)->get();
+       return view('sit.video.index',['lists'=>$lists]);
     }
 
-    public function  single()
+    public function  single($id)
     {
-        return view('sit.video.single');
+          $list = Video::find($id);
+        return view('sit.video.single',['list'=>$list]);
 
     }
 

@@ -12,7 +12,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\Video;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 
 class VideoController extends Controller
 {
@@ -23,7 +25,7 @@ class VideoController extends Controller
 
     public function  index()
     {
-        $lists = [];
+        $lists = Video::where('deleted',1)->get();
         return view('admin.video.index',['lists'=>$lists]);
     }
 
@@ -31,19 +33,20 @@ class VideoController extends Controller
     {
         if($request->isMethod('post')) {
             $args = $request->all();
-            $v = Validator::make($args, [
-
-            ]);
+            $v = Validator::make($args,
+                ['name'=>'required'],
+                ['required' => '电影名称不为空']);
             if($v->fails()) {
                 return back()->withErrors($v->errors());
             }
 
             $video = new Video();
-            $video->movie_name = $args['movie_name'];
-            $video->movie_path = $args['movie_path'];
-            $video->status      = $args['status'];
-            $video->img         = $args['img'];
-            $video->created = time();
+            $video->video_name     = $args['name'];
+            $video->path            = $args['path'];
+            $video->icon            = $args['img'];
+            $video->updated         = time();
+            $video->created         = time();
+            $video->deleted         = 1;
             if($video->save($args)) {
                 return redirect('/admin/video/index');
             } else {
