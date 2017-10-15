@@ -29,7 +29,18 @@ class LoginController extends Controller
     {
         $data = $request->all();
         if($request->isMethod('post')) {
+           $teller = new Teller();
+           $users = $teller->where(['teller_name'=>$data['teller_name']])->get();
+           if(empty($users)) {
+               return back()->withErrors('用户不存在！');
+           }
 
+           $password = md5(md5($data['teller_pass']).$data['teller_name']);
+           if($users['teller_pass'] !== $password) {
+               return back()->withErrors('密码错误！');
+           }
+
+           return redirect('/');
         }
 
     }
