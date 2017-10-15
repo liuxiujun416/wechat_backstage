@@ -89,14 +89,28 @@ class Controller extends BaseController
         $appid = 'wxa1e866bd690c001b';
         $appsecret = '4f0d59a22b729d17ebc1263e299c7a8b';
 
-
-
-       // $appid="wx8304ad33eda1cbfe";
-        //$appsecret = "48f9a8342d4db04cb7b9abe1d4bc99b7";
         $url = sprintf("https://api.weixin.qq.com/cgi-bin/token?grant_type=%s&appid=%s&secret=%s",$credential,$appid,$appsecret);
         $result = $this->httpRequest($url);
         $result = json_decode($result,true);
         return $result['access_token'];
+    }
+
+    protected function getIP()
+    {
+            if (getenv('HTTP_CLIENT_IP')) {
+                 $ip = getenv('HTTP_CLIENT_IP');
+            } elseif (getenv('HTTP_X_FORWARDED_FOR')) {
+                  $ip = getenv('HTTP_X_FORWARDED_FOR');
+            } elseif (getenv('HTTP_X_FORWARDED')) {
+                  $ip = getenv('HTTP_X_FORWARDED');
+            } elseif (getenv('HTTP_FORWARDED_FOR')) {
+                  $ip = getenv('HTTP_FORWARDED_FOR');
+            } elseif (getenv('HTTP_FORWARDED')) {
+                  $ip = getenv('HTTP_FORWARDED');
+            } else {
+                $ip = $_SERVER['REMOTE_ADDR'];
+            }
+            return $ip;
     }
 
 

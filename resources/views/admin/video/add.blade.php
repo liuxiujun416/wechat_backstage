@@ -49,6 +49,16 @@
                                 </div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label">类型</label>
+                                <div class="controls">
+                                    <select type="text" data-color="#000000" name="category_id"  >
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                         @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label">图片</label>
                                 <div class="controls">
                                     <button type="button" class="btn btn-primary"  id="select-img">select file</button>

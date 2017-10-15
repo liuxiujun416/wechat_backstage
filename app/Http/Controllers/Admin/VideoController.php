@@ -44,8 +44,7 @@ class VideoController extends Controller
             $video->video_name     = $args['name'];
             $video->path            = $args['path'];
             $video->icon            = $args['img'];
-            $video->updated         = time();
-            $video->created         = time();
+            $video->category_id    = $args['category_id'];
             $video->deleted         = 1;
             if($video->save($args)) {
                 return redirect('/admin/video/index');
@@ -53,7 +52,8 @@ class VideoController extends Controller
                 return back()->withErrors('添加失败');
             }
         }
-        return view('admin.video.add');
+        $categories = DB::table('video_category')->where('deleted',1)->get();
+        return view('admin.video.add',['categories'=>$categories]);
     }
 
 }

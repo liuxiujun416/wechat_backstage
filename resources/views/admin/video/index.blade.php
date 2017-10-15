@@ -45,7 +45,7 @@
                                             <td><input type="checkbox" /></td>
                                             <td>{{$value['video_id']}}</td>
                                             <td>{{$value['name']}}</td>
-                                            <td><img src="{{$value['icon']}}" style="width:100px; height: 100px;" /></td>
+                                            <td><img style="width: 30px; height: 30px;" src="{{$value['icon']}}" style="width:100px; height: 100px;" /></td>
                                             <td>{{ $value['created']}}</td>
                                             <td>{{$value['deleted']}}</td>
                                             <td>Row 4</td>

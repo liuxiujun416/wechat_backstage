@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-	
 
-});
 
 
 
@@ -90,10 +87,7 @@ Route::group(['namespace' => 'Sit','prefix' => 'media'], function () {
 });
 
 
-Route::group(['namespace' => 'Sit','prefix' => '/'], function () {
-        Route::get('index', 'IndexController@index');
-        Route::post('index', 'IndexController@index');
-});
+
 
 Route::group(['namespace' => 'Sit','prefix' => 'blog'], function () {
     Route::get('index', 'BlogController@index');
@@ -103,9 +97,10 @@ Route::group(['namespace' => 'Sit','prefix' => 'blog'], function () {
 });
 
 
-Route::group(['namespace' => 'Sit','prefix' => 'video'], function () {
-    Route::get('index', 'VideoController@index');
+Route::group(['namespace' => 'Sit','prefix' => '/'], function () {
+    Route::get('/{id?}', 'VideoController@index');
     Route::get('single/{id}', 'VideoController@single');
+    Route::post('reg', 'LoginController@reg');
 });
 
 
